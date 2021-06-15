@@ -28,7 +28,6 @@ preferences {
 	section("Raspberry Pi Setup") {
 		input "piIP", "text", title: "Raspberry Pi IP", multiple: false, required: true
         input "piPort", "text", title: "Raspberry Pi Port", multiple: false, required: true
-        input "theHub", "hub", title: "On which hub?", multiple: false, required: true
 	}
     
     section("Garage Door Controller Setup") {
@@ -48,7 +47,7 @@ def initialize() {
     
    subscribe(location, null, response, [filterEvents:false])
    
-   def device = addChildDevice("mdunning", "Virtual Pi Garage Door Controller", getGarageDoorControllerId(), theHub.id, [label:"Garage Door Opener", name:"Garage Door Opener"])
+   def device = addChildDevice("mdunning", "Virtual Pi Garage Door Controller", getGarageDoorControllerId(), null, [label:"Garage Door Opener", name:"Garage Door Opener"])
    subscribe(device, "button.pushed", switchPushed)
    
    // Set the state of the door to "unknown" for initialization the state will be updated once the 
